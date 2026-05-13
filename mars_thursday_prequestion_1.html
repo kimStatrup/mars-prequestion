@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>火星計劃・週四直播 事前提問</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1612;
+    --bg2: #211d18;
+    --card: #2a2420;
+    --border: rgba(255,220,160,0.12);
+    --gold: #e8c97a;
+    --gold-soft: rgba(232,201,122,0.15);
+    --gold-glow: rgba(232,201,122,0.06);
+    --text: #f0e8d8;
+    --text-muted: #9a8f7e;
+    --text-dim: #5c5448;
+    --accent: #c4773a;
+    --red-soft: rgba(196,119,58,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,201,122,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(196,119,58,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    padding: 56px 0 40px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    background: var(--gold-glow);
+  }
+
+  .badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .event-meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+
+  .event-meta strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .main-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .main-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+  }
+
+  .divider-icon {
+    color: var(--gold);
+    font-size: 14px;
+    opacity: 0.6;
+  }
+
+  /* Intro block */
+  .intro {
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+
+  .intro-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 2;
+    margin-bottom: 20px;
+  }
+
+  .intro-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Pain cards */
+  .pain-section {
+    margin: 32px 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+
+  .pain-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .pain-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .pain-card:hover {
+    border-color: rgba(232,201,122,0.25);
+    background: rgba(42,36,32,0.9);
+  }
+
+  .pain-card .pain-num {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 6px;
+    opacity: 0.7;
+  }
+
+  /* CTA Quote */
+  .quote-block {
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin: 28px 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .quote-block p {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  .quote-block .quote-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  /* Form section */
+  .form-section {
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s ease forwards;
+  }
+
+  .form-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .form-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  label .required {
+    color: var(--accent);
+    margin-left: 3px;
+  }
+
+  label .hint {
+    display: block;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 14px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    -webkit-appearance: none;
+  }
+
+  input[type="text"]::placeholder,
+  textarea::placeholder {
+    color: var(--text-dim);
+  }
+
+  input[type="text"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: rgba(232,201,122,0.4);
+    box-shadow: 0 0 0 3px rgba(232,201,122,0.06);
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.8;
+  }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8f7e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+
+  select option {
+    background: var(--bg2);
+    color: var(--text);
+  }
+
+  .optional-tag {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-left: 6px;
+  }
+
+  /* Submit button */
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #c4773a 0%, #e8c97a 100%);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1612;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .cta-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #c4773a 0%, #e8c97a 100%);
+    border-radius: 12px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1612;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .cta-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  /* Thank you state */
+  .thankyou {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .thankyou.show {
+    display: block;
+  }
+
+  .thankyou-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .thankyou h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .thankyou p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 2;
+    margin-bottom: 6px;
+  }
+
+  .thankyou p strong {
+    color: var(--gold);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .pain-grid { grid-template-columns: 1fr 1fr; }
+    .header { padding: 40px 0 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="badge">火星計劃・週四直播</div>
+    <p class="event-meta" id="event-meta">
+      <strong id="event-date">載入中</strong>
+    </p>
+    <h1 class="main-title" id="main-title">載入中</h1>
+    <p class="subtitle">事前提問</p>
+  </div>
+
+  <div class="divider"><span class="divider-icon">✦</span></div>
+
+  <div class="intro">
+    <p class="intro-text" id="intro-body">
+      你有沒有一個問題，<strong>卡在心裡很久了</strong>，卻一直找不到人問？<br>
+      或者你隱約知道答案，但總覺得自己還沒準備好面對它？<br><br>
+      Kim 這次直播前，先來問你一件事：<strong>你現在卡住的，是什麼？</strong><br>
+      把那個問題放進來，直播裡，我們一起拆開來看。
+    </p>
+
+    <div class="pain-section">
+      <p class="pain-label">可以問的問題長這樣</p>
+      <div class="pain-grid">
+        <div class="pain-card">
+          <span class="pain-num">工作</span>
+          「我想換工作，但每次都下不了手，到底在等什麼？」
+        </div>
+        <div class="pain-card">
+          <span class="pain-num">方向</span>
+          「對很多事有興趣，但不知道哪個才是真正想走的路。」
+        </div>
+        <div class="pain-card">
+          <span class="pain-num">家庭</span>
+          「家人不支持我想做的事，我要怎麼面對這個壓力？」
+        </div>
+        <div class="pain-card">
+          <span class="pain-num">自我</span>
+          「我知道方向，但一直沒有行動，是懶還是根本沒那麼想要？」
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:12px;text-align:center;">不一定要問這些，這只是讓你知道「什麼程度的問題都可以問」。</p>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p>你的問題，不會出現在 Google 上。<br>但它值得被認真對待。<br>把它寫下來，Kim 在直播裡等你。</p>
+    <p class="quote-note">Kim 將在直播中優先針對大家的提問進行回應。</p>
+  </div>
+
+  <div class="form-section">
+    <p class="form-title">填寫你的提問</p>
+    <p class="form-desc">寫真實的就好，不用修飾。</p>
+
+    <form id="question-form">
+      <div class="form-group">
+        <label for="name">
+          我們怎麼稱呼你？<span class="required">*</span>
+          <span class="hint">只是讓 Kim 更有感覺，不會出現在整理文件裡。</span>
+        </label>
+        <input type="text" id="name" placeholder="你的名字或暱稱" required>
+      </div>
+
+      <div class="form-group">
+        <label for="q1">
+          如果只能問 Kim 一個問題，你最想問什麼？<span class="required">*</span>
+          <span class="hint">把那個在心裡卡最久的問題，直接寫出來。</span>
+        </label>
+        <textarea id="q1" placeholder="寫下你的問題，不用擔心問得對不對。" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="type">
+          這個問題比較屬於哪個方向？<span class="optional-tag">選填</span>
+        </label>
+        <select id="type">
+          <option value="" disabled selected>選一個最接近的</option>
+          <option value="direction">人生方向與選擇</option>
+          <option value="work">工作與事業</option>
+          <option value="family">家庭與關係</option>
+          <option value="confidence">自我懷疑與信念</option>
+          <option value="other">其他</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="q2">
+          如果還有第二個問題，你想問什麼？<span class="optional-tag">選填</span>
+        </label>
+        <textarea id="q2" placeholder="第二個問題（可以不填）" style="min-height:80px;"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="msg">
+          有什麼想對 Kim 說的嗎？<span class="optional-tag">選填</span>
+        </label>
+        <textarea id="msg" placeholder="什麼都可以，一句話也好。" style="min-height:80px;"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">送出提問 →</button>
+    </form>
+
+    <div class="thankyou" id="thankyou">
+      <div class="thankyou-icon">✦</div>
+      <h2>謝謝你的提問。</h2>
+      <p>Kim 看到了。</p>
+      <p>直播裡，我們一起拆開來看。</p>
+      <p style="margin-top:20px;"><strong id="thankyou-date"></strong><br>LINE 社群直播，不見不散。</p>
+      <a href="https://kimlife.tw/Cz3m2" target="_blank" class="cta-btn">免費解鎖｜火星前導旅程</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    火星計劃：Artemis 重生 ・ 2026.07.01 台北小巨蛋
+  </div>
+
+</div>
+
+<script>
+  // 從 URL 參數讀取本週資訊
+  // 用法範例：?title=你以為你在害怕選錯&date=5月14日（四）中午12:00&intro=（選填，自訂暖身文）
+  function getParam(key) {
+    const url = new URLSearchParams(window.location.search);
+    return url.get(key);
+  }
+
+  const title = getParam('title') || '你以為你在害怕選錯，其實你在逃避失敗。';
+  const date  = getParam('date')  || '5月14日（四）中午 12:00';
+  const intro = getParam('intro');
+
+  // 寫入頁面
+  document.getElementById('main-title').textContent = title;
+  document.getElementById('event-date').textContent = date + ' 直播';
+  document.getElementById('thankyou-date').textContent = date;
+
+  if (intro) {
+    document.getElementById('intro-body').innerHTML = intro;
+  }
+
+  // 表單送出（目前為前端模擬，換成 Google 表單時請見下方說明）
+  document.getElementById('question-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const q1   = document.getElementById('q1').value.trim();
+    if (!name || !q1) return;
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgVMzdrUYCBpRFQiba6YmAwtPtAgk6uKk0yS47Or7EvK-KuPi3NoxckUyZUPaOwVR4/exec';
+
+    const btn = document.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = '送出中...';
+
+    const params = new URLSearchParams({
+      name: document.getElementById('name').value,
+      q1:   document.getElementById('q1').value,
+      type: document.getElementById('type').value,
+      q2:   document.getElementById('q2').value,
+      msg:  document.getElementById('msg').value,
+    });
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    }).finally(() => showThankyou());
+  });
+
+  function showThankyou() {
+    document.getElementById('question-form').style.display = 'none';
+    const ty = document.getElementById('thankyou');
+    ty.classList.add('show');
+  }
+</script>
+</body>
+</html>
