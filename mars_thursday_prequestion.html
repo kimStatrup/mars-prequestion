@@ -22,7 +22,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -35,7 +34,6 @@
     overflow-x: hidden;
   }
 
-  /* Background texture */
   body::before {
     content: '';
     position: fixed;
@@ -55,7 +53,6 @@
     z-index: 1;
   }
 
-  /* Header */
   .header {
     padding: 56px 0 40px;
     text-align: center;
@@ -124,7 +121,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Divider */
   .divider {
     display: flex;
     align-items: center;
@@ -148,7 +144,6 @@
     opacity: 0.6;
   }
 
-  /* Intro block */
   .intro {
     opacity: 0;
     animation: fadeUp 0.8s 0.3s ease forwards;
@@ -166,7 +161,6 @@
     font-weight: 500;
   }
 
-  /* Pain cards */
   .pain-section {
     margin: 32px 0;
     opacity: 0;
@@ -212,7 +206,6 @@
     opacity: 0.7;
   }
 
-  /* CTA Quote */
   .quote-block {
     background: var(--gold-soft);
     border-left: 3px solid var(--gold);
@@ -237,7 +230,6 @@
     font-family: 'Noto Sans TC', sans-serif;
   }
 
-  /* Form section */
   .form-section {
     opacity: 0;
     animation: fadeUp 0.8s 0.6s ease forwards;
@@ -336,7 +328,6 @@
     margin-left: 6px;
   }
 
-  /* Submit button */
   .submit-btn {
     width: 100%;
     padding: 16px;
@@ -353,14 +344,8 @@
     margin-top: 8px;
   }
 
-  .submit-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-
-  .submit-btn:active {
-    transform: translateY(0);
-  }
+  .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
 
   .cta-btn {
     display: inline-block;
@@ -377,12 +362,8 @@
     transition: opacity 0.2s, transform 0.2s;
   }
 
-  .cta-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
+  .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-  /* Thank you state */
   .thankyou {
     display: none;
     text-align: center;
@@ -391,14 +372,9 @@
     animation: fadeUp 0.6s ease forwards;
   }
 
-  .thankyou.show {
-    display: block;
-  }
+  .thankyou.show { display: block; }
 
-  .thankyou-icon {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
+  .thankyou-icon { font-size: 36px; margin-bottom: 20px; }
 
   .thankyou h2 {
     font-family: 'Noto Serif TC', serif;
@@ -414,11 +390,8 @@
     margin-bottom: 6px;
   }
 
-  .thankyou p strong {
-    color: var(--gold);
-  }
+  .thankyou p strong { color: var(--gold); }
 
-  /* Footer */
   .footer {
     text-align: center;
     font-size: 11px;
@@ -456,38 +429,38 @@
 
   <div class="intro">
     <p class="intro-text" id="intro-body">
-      你有沒有一個問題，<strong>卡在心裡很久了</strong>，卻一直找不到人問？<br>
-      或者你隱約知道答案，但總覺得自己還沒準備好面對它？<br><br>
-      Kim 這次直播前，先來問你一件事：<strong>你現在卡住的，是什麼？</strong><br>
-      把那個問題放進來，直播裡，我們一起拆開來看。
+      你有沒有看過火星計劃的廣告，<strong>卻說不清楚它到底是什麼？</strong><br>
+      或者你想推薦給朋友，但一開口就卡住了？<br><br>
+      今晚 Kim 想把這件事說清楚。<strong>在直播開始前，先把你最想搞懂的問題丟進來。</strong><br>
+      你的問題，就是今晚的方向。
     </p>
 
     <div class="pain-section">
-      <p class="pain-label">可以問的問題長這樣</p>
+      <p class="pain-label">大家常有的疑問長這樣</p>
       <div class="pain-grid">
         <div class="pain-card">
-          <span class="pain-num">工作</span>
-          「我想換工作，但每次都下不了手，到底在等什麼？」
+          <span class="pain-num">活動定位</span>
+          「火星計劃跟一般演講活動有什麼不一樣？」
         </div>
         <div class="pain-card">
-          <span class="pain-num">方向</span>
-          「對很多事有興趣，但不知道哪個才是真正想走的路。」
+          <span class="pain-num">適合對象</span>
+          「我現在狀態還 OK，這個活動適合我嗎？」
         </div>
         <div class="pain-card">
-          <span class="pain-num">家庭</span>
-          「家人不支持我想做的事，我要怎麼面對這個壓力？」
+          <span class="pain-num">現場價值</span>
+          「這種活動在家看直播跟到現場，有差嗎？」
         </div>
         <div class="pain-card">
-          <span class="pain-num">自我</span>
-          「我知道方向，但一直沒有行動，是懶還是根本沒那麼想要？」
+          <span class="pain-num">活動性質</span>
+          「這是心靈雞湯還是成功學那類的嗎？」
         </div>
       </div>
-      <p style="font-size:12px;color:var(--text-dim);margin-top:12px;text-align:center;">不一定要問這些，這只是讓你知道「什麼程度的問題都可以問」。</p>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:12px;text-align:center;">不一定要問這些，這只是讓你知道「什麼問題都可以問」。</p>
     </div>
   </div>
 
   <div class="quote-block">
-    <p>你的問題，不會出現在 Google 上。<br>但它值得被認真對待。<br>把它寫下來，Kim 在直播裡等你。</p>
+    <p>你問的那個問題，可能很多人也卡在同一個地方。<br>寫下來，今晚直播裡，我們一起把它說清楚。</p>
     <p class="quote-note">Kim 將在直播中優先針對大家的提問進行回應。</p>
   </div>
 
@@ -506,10 +479,10 @@
 
       <div class="form-group">
         <label for="q1">
-          如果只能問 Kim 一個問題，你最想問什麼？<span class="required">*</span>
-          <span class="hint">把那個在心裡卡最久的問題，直接寫出來。</span>
+          你對火星計劃最想搞清楚的是什麼？<span class="required">*</span>
+          <span class="hint">任何問題都可以，沒有對錯。</span>
         </label>
-        <textarea id="q1" placeholder="寫下你的問題，不用擔心問得對不對。" required></textarea>
+        <textarea id="q1" placeholder="把那個卡在心裡的問題，直接寫出來。" required></textarea>
       </div>
 
       <div class="form-group">
@@ -518,10 +491,10 @@
         </label>
         <select id="type">
           <option value="" disabled selected>選一個最接近的</option>
-          <option value="direction">人生方向與選擇</option>
-          <option value="work">工作與事業</option>
-          <option value="family">家庭與關係</option>
-          <option value="confidence">自我懷疑與信念</option>
+          <option value="positioning">活動定位與內容</option>
+          <option value="fit">我適不適合來</option>
+          <option value="value">現場值不值得</option>
+          <option value="trust">對活動性質的疑慮</option>
           <option value="other">其他</option>
         </select>
       </div>
@@ -547,7 +520,7 @@
       <div class="thankyou-icon">✦</div>
       <h2>謝謝你的提問。</h2>
       <p>Kim 看到了。</p>
-      <p>直播裡，我們一起拆開來看。</p>
+      <p>今晚直播裡，我們一起把它說清楚。</p>
       <p style="margin-top:20px;"><strong id="thankyou-date"></strong><br>LINE 社群直播，不見不散。</p>
       <a href="https://kimlife.tw/Cz3m2" target="_blank" class="cta-btn">免費解鎖｜火星前導旅程</a>
     </div>
@@ -560,18 +533,15 @@
 </div>
 
 <script>
-  // 從 URL 參數讀取本週資訊
-  // 用法範例：?title=你以為你在害怕選錯&date=5月14日（四）中午12:00&intro=（選填，自訂暖身文）
   function getParam(key) {
     const url = new URLSearchParams(window.location.search);
     return url.get(key);
   }
 
-  const title = getParam('title') || '你以為你在害怕選錯，其實你在逃避失敗。';
-  const date  = getParam('date')  || '5月14日（四）中午 12:00';
+  const title = getParam('title') || '火星計劃到底是什麼？';
+  const date  = getParam('date')  || '5月28日（四）19:30';
   const intro = getParam('intro');
 
-  // 寫入頁面
   document.getElementById('main-title').textContent = title;
   document.getElementById('event-date').textContent = date + ' 直播';
   document.getElementById('thankyou-date').textContent = date;
@@ -580,7 +550,6 @@
     document.getElementById('intro-body').innerHTML = intro;
   }
 
-  // 表單送出（目前為前端模擬，換成 Google 表單時請見下方說明）
   document.getElementById('question-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
