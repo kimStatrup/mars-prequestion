@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>火星計劃・週四直播 事前提問</title>
+
+<title>火星計劃・任意提問直播</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --bg: #1a1612;
@@ -18,11 +21,17 @@
     --text-muted: #9a8f7e;
     --text-dim: #5c5448;
     --accent: #c4773a;
-    --red-soft: rgba(196,119,58,0.15);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
     background: var(--bg);
@@ -85,8 +94,14 @@
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.7); }
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.7);
+    }
   }
 
   .event-meta {
@@ -103,11 +118,11 @@
 
   .main-title {
     font-family: 'Noto Serif TC', serif;
-    font-size: clamp(22px, 5vw, 30px);
+    font-size: clamp(24px, 5.5vw, 34px);
     font-weight: 700;
     line-height: 1.5;
     color: var(--text);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .main-title em {
@@ -161,13 +176,13 @@
     font-weight: 500;
   }
 
-  .pain-section {
+  .question-section {
     margin: 32px 0;
     opacity: 0;
     animation: fadeUp 0.8s 0.4s ease forwards;
   }
 
-  .pain-label {
+  .question-label {
     font-size: 10px;
     letter-spacing: 0.2em;
     color: var(--text-dim);
@@ -175,13 +190,13 @@
     margin-bottom: 14px;
   }
 
-  .pain-grid {
+  .question-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
 
-  .pain-card {
+  .question-card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -192,18 +207,25 @@
     transition: border-color 0.3s, background 0.3s;
   }
 
-  .pain-card:hover {
+  .question-card:hover {
     border-color: rgba(232,201,122,0.25);
     background: rgba(42,36,32,0.9);
   }
 
-  .pain-card .pain-num {
+  .question-card .question-tag {
     display: block;
     font-size: 10px;
     letter-spacing: 0.15em;
     color: var(--gold);
     margin-bottom: 6px;
     opacity: 0.7;
+  }
+
+  .small-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 12px;
+    text-align: center;
   }
 
   .quote-block {
@@ -273,9 +295,15 @@
     margin-top: 2px;
   }
 
+  .optional-tag {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-left: 6px;
+  }
+
   input[type="text"],
-  textarea,
-  select {
+  textarea {
     width: 100%;
     background: var(--card);
     border: 1px solid var(--border);
@@ -296,36 +324,15 @@
   }
 
   input[type="text"]:focus,
-  textarea:focus,
-  select:focus {
+  textarea:focus {
     border-color: rgba(232,201,122,0.4);
     box-shadow: 0 0 0 3px rgba(232,201,122,0.06);
   }
 
   textarea {
-    min-height: 100px;
+    min-height: 110px;
     resize: vertical;
     line-height: 1.8;
-  }
-
-  select {
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8f7e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-  }
-
-  select option {
-    background: var(--bg2);
-    color: var(--text);
-  }
-
-  .optional-tag {
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    margin-left: 6px;
   }
 
   .submit-btn {
@@ -344,8 +351,20 @@
     margin-top: 8px;
   }
 
-  .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+  }
 
   .cta-btn {
     display: inline-block;
@@ -362,7 +381,10 @@
     transition: opacity 0.2s, transform 0.2s;
   }
 
-  .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .cta-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
 
   .thankyou {
     display: none;
@@ -372,9 +394,14 @@
     animation: fadeUp 0.6s ease forwards;
   }
 
-  .thankyou.show { display: block; }
+  .thankyou.show {
+    display: block;
+  }
 
-  .thankyou-icon { font-size: 36px; margin-bottom: 20px; }
+  .thankyou-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
 
   .thankyou h2 {
     font-family: 'Noto Serif TC', serif;
@@ -390,7 +417,9 @@
     margin-bottom: 6px;
   }
 
-  .thankyou p strong { color: var(--gold); }
+  .thankyou p strong {
+    color: var(--gold);
+  }
 
   .footer {
     text-align: center;
@@ -403,114 +432,155 @@
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (max-width: 480px) {
-    .pain-grid { grid-template-columns: 1fr 1fr; }
-    .header { padding: 40px 0 28px; }
+    .container {
+      padding: 0 20px 64px;
+    }
+
+    .header {
+      padding: 40px 0 28px;
+    }
+
+    .question-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .quote-block {
+      padding: 18px 20px;
+    }
   }
 </style>
 </head>
+
 <body>
 <div class="container">
 
   <div class="header">
-    <div class="badge">火星計劃・週四直播</div>
+    <div class="badge">火星計劃・任意提問直播</div>
+
     <p class="event-meta" id="event-meta">
       <strong id="event-date">載入中</strong>
     </p>
+
     <h1 class="main-title" id="main-title">載入中</h1>
-    <p class="subtitle">事前提問</p>
+
+    <p class="subtitle">直播前，先把你想問的丟進來</p>
   </div>
 
-  <div class="divider"><span class="divider-icon">✦</span></div>
+  <div class="divider">
+    <span class="divider-icon">✦</span>
+  </div>
 
   <div class="intro">
     <p class="intro-text" id="intro-body">
-      你有沒有看過火星計劃的廣告，<strong>卻說不清楚它到底是什麼？</strong><br>
-      或者你想推薦給朋友，但一開口就卡住了？<br><br>
-      今晚 Kim 想把這件事說清楚。<strong>在直播開始前，先把你最想搞懂的問題丟進來。</strong><br>
-      你的問題，就是今晚的方向。
+      這場直播不是正式說明會，<br>
+      也不是要你準備好什麼很完整的問題。<br><br>
+
+      如果你看過火星計劃，<strong>但還說不清楚它到底是什麼；</strong><br>
+      如果你有點好奇，但也還在觀望；<br>
+      如果你想知道這場活動適不適合你，或現場到底會發生什麼；<br><br>
+
+      都可以先把問題丟進來。<br>
+      <strong>直播裡，Kim 會直接從大家真正想問的問題開始聊。</strong>
     </p>
 
-    <div class="pain-section">
-      <p class="pain-label">大家常有的疑問長這樣</p>
-      <div class="pain-grid">
-        <div class="pain-card">
-          <span class="pain-num">活動定位</span>
-          「火星計劃跟一般演講活動有什麼不一樣？」
+    <div class="question-section">
+      <p class="question-label">你可以這樣問</p>
+
+      <div class="question-grid">
+        <div class="question-card">
+          <span class="question-tag">基本疑問</span>
+          「火星計劃到底是在做什麼？」
         </div>
-        <div class="pain-card">
-          <span class="pain-num">適合對象</span>
-          「我現在狀態還 OK，這個活動適合我嗎？」
+
+        <div class="question-card">
+          <span class="question-tag">活動性質</span>
+          「這是演講、課程，還是活動？」
         </div>
-        <div class="pain-card">
-          <span class="pain-num">現場價值</span>
-          「這種活動在家看直播跟到現場，有差嗎？」
+
+        <div class="question-card">
+          <span class="question-tag">適合對象</span>
+          「我現在沒有很迷惘，也適合去嗎？」
         </div>
-        <div class="pain-card">
-          <span class="pain-num">活動性質</span>
-          「這是心靈雞湯還是成功學那類的嗎？」
+
+        <div class="question-card">
+          <span class="question-tag">現場體驗</span>
+          「如果我只是想聽 Kim 講，值得到現場嗎？」
+        </div>
+
+        <div class="question-card">
+          <span class="question-tag">真實疑慮</span>
+          「台北小巨蛋這種規模，現場會不會很像大型造勢？」
+        </div>
+
+        <div class="question-card">
+          <span class="question-tag">同行朋友</span>
+          「我帶朋友去，他會不會看不懂？」
         </div>
       </div>
-      <p style="font-size:12px;color:var(--text-dim);margin-top:12px;text-align:center;">不一定要問這些，這只是讓你知道「什麼問題都可以問」。</p>
+
+      <p class="small-note">
+        不一定要問這些。只要是你對火星計劃的好奇、疑問、猶豫、看不懂，都可以寫下來。
+      </p>
     </div>
   </div>
 
   <div class="quote-block">
-    <p>你問的那個問題，可能很多人也卡在同一個地方。<br>寫下來，今晚直播裡，我們一起把它說清楚。</p>
-    <p class="quote-note">Kim 將在直播中優先針對大家的提問進行回應。</p>
+    <p>
+      不用修飾，<br>
+      不用問得很漂亮。<br><br>
+      你心裡真的卡住的那個問題，<br>
+      就是最值得被回答的問題。
+    </p>
+
+    <p class="quote-note">
+      Kim 將在直播中優先回應大家送出的提問。
+    </p>
   </div>
 
   <div class="form-section">
     <p class="form-title">填寫你的提問</p>
-    <p class="form-desc">寫真實的就好，不用修飾。</p>
+    <p class="form-desc">寫真實的就好，不用整理成很完整。</p>
 
     <form id="question-form">
       <div class="form-group">
         <label for="name">
           我們怎麼稱呼你？<span class="required">*</span>
-          <span class="hint">只是讓 Kim 更有感覺，不會出現在整理文件裡。</span>
+          <span class="hint">填名字或暱稱都可以。</span>
         </label>
-        <input type="text" id="name" placeholder="你的名字或暱稱" required>
+        <input type="text" id="name" name="name" placeholder="你的名字或暱稱" required>
       </div>
 
       <div class="form-group">
         <label for="q1">
-          你對火星計劃最想搞清楚的是什麼？<span class="required">*</span>
+          你最想問 Kim 關於火星計劃的問題是什麼？<span class="required">*</span>
           <span class="hint">任何問題都可以，沒有對錯。</span>
         </label>
-        <textarea id="q1" placeholder="把那個卡在心裡的問題，直接寫出來。" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="type">
-          這個問題比較屬於哪個方向？<span class="optional-tag">選填</span>
-        </label>
-        <select id="type">
-          <option value="" disabled selected>選一個最接近的</option>
-          <option value="positioning">活動定位與內容</option>
-          <option value="fit">我適不適合來</option>
-          <option value="value">現場值不值得</option>
-          <option value="trust">對活動性質的疑慮</option>
-          <option value="other">其他</option>
-        </select>
+        <textarea id="q1" name="q1" placeholder="把你心裡最想問的問題，直接寫出來。" required></textarea>
       </div>
 
       <div class="form-group">
         <label for="q2">
-          如果還有第二個問題，你想問什麼？<span class="optional-tag">選填</span>
+          如果還有第二個問題，也可以寫下來<span class="optional-tag">選填</span>
         </label>
-        <textarea id="q2" placeholder="第二個問題（可以不填）" style="min-height:80px;"></textarea>
+        <textarea id="q2" name="q2" placeholder="第二個問題，可以不填。" style="min-height:80px;"></textarea>
       </div>
 
       <div class="form-group">
         <label for="msg">
-          有什麼想對 Kim 說的嗎？<span class="optional-tag">選填</span>
+          有什麼想補充，或想對 Kim 說的嗎？<span class="optional-tag">選填</span>
         </label>
-        <textarea id="msg" placeholder="什麼都可以，一句話也好。" style="min-height:80px;"></textarea>
+        <textarea id="msg" name="msg" placeholder="什麼都可以，一句話也好。" style="min-height:80px;"></textarea>
       </div>
 
       <button type="submit" class="submit-btn">送出提問 →</button>
@@ -518,11 +588,21 @@
 
     <div class="thankyou" id="thankyou">
       <div class="thankyou-icon">✦</div>
+
       <h2>謝謝你的提問。</h2>
+
       <p>Kim 看到了。</p>
-      <p>今晚直播裡，我們一起把它說清楚。</p>
-      <p style="margin-top:20px;"><strong id="thankyou-date"></strong><br>LINE 社群直播，不見不散。</p>
-      <a href="https://kimlife.tw/Cz3m2" target="_blank" class="cta-btn">免費解鎖｜火星前導旅程</a>
+      <p>直播裡，我們會從大家真正想問的問題開始聊。</p>
+      <p>不用擔心你的問題太小，也不用擔心問得不夠完整。</p>
+
+      <p style="margin-top:20px;">
+        <strong id="thankyou-date"></strong><br>
+        火星計劃任意提問直播，直播見。
+      </p>
+
+      <a href="https://kimlife.tw/Cz3m2" target="_blank" class="cta-btn">
+        免費解鎖｜火星前導旅程
+      </a>
     </div>
   </div>
 
@@ -538,11 +618,20 @@
     return url.get(key);
   }
 
-  const title = getParam('title') || '火星計劃到底是什麼？';
-  const date  = getParam('date')  || '5月28日（四）19:30';
+  /*
+    你可以用網址參數快速改標題、時間、開場文字。
+
+    例如：
+    index.html?title=關於火星計劃，你可以問任何問題&date=6月25日（四）20:00
+
+    如果不想用網址參數，就直接改下面預設值。
+  */
+
+  const title = getParam('title') || '關於火星計劃，<em>你可以問任何問題</em>';
+  const date  = getParam('date')  || '6月25日（四）20:00';
   const intro = getParam('intro');
 
-  document.getElementById('main-title').textContent = title;
+  document.getElementById('main-title').innerHTML = title;
   document.getElementById('event-date').textContent = date + ' 直播';
   document.getElementById('thankyou-date').textContent = date;
 
@@ -555,8 +644,13 @@
 
     const name = document.getElementById('name').value.trim();
     const q1   = document.getElementById('q1').value.trim();
+
     if (!name || !q1) return;
 
+    /*
+      這裡換成你的 Google Apps Script Web App URL。
+      目前先沿用你原本提供的網址。
+    */
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgVMzdrUYCBpRFQiba6YmAwtPtAgk6uKk0yS47Or7EvK-KuPi3NoxckUyZUPaOwVR4/exec';
 
     const btn = document.querySelector('.submit-btn');
@@ -565,25 +659,35 @@
 
     const params = new URLSearchParams({
       name: document.getElementById('name').value,
-      q1:   document.getElementById('q1').value,
-      type: document.getElementById('type').value,
-      q2:   document.getElementById('q2').value,
-      msg:  document.getElementById('msg').value,
+      q1: document.getElementById('q1').value,
+      q2: document.getElementById('q2').value,
+      msg: document.getElementById('msg').value,
+      source: '火星計劃任意提問直播'
     });
 
     fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
       body: params.toString()
-    }).finally(() => showThankyou());
+    }).finally(() => {
+      showThankyou();
+    });
   });
 
   function showThankyou() {
     document.getElementById('question-form').style.display = 'none';
     const ty = document.getElementById('thankyou');
     ty.classList.add('show');
+
+    window.scrollTo({
+      top: ty.offsetTop - 40,
+      behavior: 'smooth'
+    });
   }
 </script>
+
 </body>
 </html>
